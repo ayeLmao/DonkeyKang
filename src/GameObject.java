@@ -11,6 +11,7 @@ public class GameObject {
 	private int x,y,width, height;
 	private double direction;
 	protected Image img;
+	protected String type;
 	
 	public GameObject(int x, int y, int wid, int ht) {
 		this.x = x;
@@ -19,14 +20,20 @@ public class GameObject {
 		this.height = ht;
 		
 	}
-	public void openImage(String src, String src2) {
+	
+	public void openImage(String src) {
 		try {
-			URL url = getClass().getResource("res/" + src + ".png");
+			URL url = getClass().getResource("images/" + src + ".png");
 			img = ImageIO.read(url);
 		} catch (Exception e) {
 			System.out.println("Image could not be opened: " + "res/" + src + ".png");
 			e.printStackTrace();
 		}
+	}
+
+	public void draw(Graphics g){
+		g.drawImage(img, x, y, null);
+		
 	}
 	
 	public double getX() {
@@ -35,9 +42,6 @@ public class GameObject {
 	
 	public double getY() {
 		return this.y;
-	}
-	public void draw(Graphics g){
-		g.drawImage(img, x, y, this.width, this.height, null);
 	}
 	public void setX(int x) {
 		this.x = x;

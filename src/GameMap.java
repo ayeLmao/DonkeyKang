@@ -27,4 +27,10 @@ public abstract class GameMap {
 	public void tick() {
 
 	}
+
+	public void jump() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
