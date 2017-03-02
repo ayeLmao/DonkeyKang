@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 public class MovingObjectsGameLauncher {
 
 	public static void main(String[] args) {
+		System.setProperty("sun.java2d.opengl", "true");
 		JFrame gameFrame = new JFrame();
 		Map<String,String> environMap= System.getenv();
 		System.out.println(environMap.keySet());
@@ -17,7 +18,7 @@ public class MovingObjectsGameLauncher {
 		MovingObjectsPanel mop = new MovingObjectsPanel(d);
 		gameFrame.add(mop);
 		gameFrame.pack();
-		gameFrame.setSize(800, 600);
+		gameFrame.setSize(960, 600);
 		mop.setBackground(Color.black);
 		gameFrame.setVisible(true);
 		gameFrame.setDefaultCloseOperation(gameFrame.EXIT_ON_CLOSE);

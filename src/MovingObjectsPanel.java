@@ -43,75 +43,60 @@ public class MovingObjectsPanel extends JPanel {
 	
 	private void setUpKeyMappings() {
 
-		this.getInputMap().put(KeyStroke.getKeyStroke("pressed SPACE"), "jump");
+		this.getInputMap().put(KeyStroke.getKeyStroke("pressed SPACE"), "beginJump");
+		this.getInputMap().put(KeyStroke.getKeyStroke("released SPACE"), "endJump");
 		this.getInputMap().put(KeyStroke.getKeyStroke("pressed RIGHT"), "beginRight");
 		this.getInputMap().put(KeyStroke.getKeyStroke("released RIGHT"), "endRight");
 		this.getInputMap().put(KeyStroke.getKeyStroke("pressed LEFT"), "beginLeft");
 		this.getInputMap().put(KeyStroke.getKeyStroke("released LEFT"), "endLeft");
 	
-		this.getActionMap().put("jump", new AbstractAction() {
+		this.getActionMap().put("beginJump", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gm.jump();
+				gm.beginJump();
 				repaint();
 			}
 		});
 		
-//		this.getActionMap().put("endUp", new AbstractAction() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				gm.endMoveUp();
-//				repaint();
-//			}
-//		});
-//		
-//		this.getActionMap().put("beginDown", new AbstractAction() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				gm.beginMoveDown();
-//				repaint();
-//			}
-//		});
-//		
-//		this.getActionMap().put("endDown", new AbstractAction() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				gm.endMoveDown();
-//				repaint();
-//			}
-//		});
-//		
-//		this.getActionMap().put("beginRight", new AbstractAction() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				gm.beginMoveRight();
-//				repaint();
-//			}
-//		});
-//		
-//		this.getActionMap().put("endRight", new AbstractAction() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				gm.endMoveRight();
-//				repaint();
-//			}
-//		});
-//		
-//		this.getActionMap().put("beginLeft", new AbstractAction() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				gm.beginMoveLeft();
-//				repaint();
-//			}
-//		});
-//		
-//		this.getActionMap().put("endLeft", new AbstractAction() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				gm.endMoveLeft();
-//				repaint();
-//			}
-//		});
+		this.getActionMap().put("endJump", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gm.endJump();
+				repaint();  
+			}
+		});
+		
+		this.getActionMap().put("beginRight", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gm.beginMoveRight();
+				repaint();
+			}
+		});
+		
+		this.getActionMap().put("endRight", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gm.endMoveRight();
+				repaint();
+			}
+		});
+		
+		this.getActionMap().put("beginLeft", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gm.beginMoveLeft();
+				repaint();
+			}
+		});
+		
+		this.getActionMap().put("endLeft", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gm.endMoveLeft();
+				repaint();
+			}
+		});
 		
 		this.requestFocusInWindow();
 		

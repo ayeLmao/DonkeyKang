@@ -23,11 +23,6 @@ public abstract class GameMap {
 		g.drawImage(backgroundImage, x, y,w,h,null);
 	}
 
-
-	public void tick() {
-
-	}
-
 	public void jump() {
 		// TODO Auto-generated method stub
 		

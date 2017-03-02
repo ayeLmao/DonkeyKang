@@ -8,7 +8,10 @@ import javax.imageio.ImageIO;
 
 
 public class GameObject {
-	private int x,y,width, height;
+	protected int x;
+	protected int y;
+	private int width;
+	private int height;
 	private double direction;
 	protected Image img;
 	protected String type;
@@ -23,10 +26,10 @@ public class GameObject {
 	
 	public void openImage(String src) {
 		try {
-			URL url = getClass().getResource("images/" + src + ".png");
+			URL url = getClass().getResource("Images/" + src + ".png");
 			img = ImageIO.read(url);
 		} catch (Exception e) {
-			System.out.println("Image could not be opened: " + "res/" + src + ".png");
+			System.out.println("Image could not be opened: " + "images/" + src + ".png");
 			e.printStackTrace();
 		}
 	}
