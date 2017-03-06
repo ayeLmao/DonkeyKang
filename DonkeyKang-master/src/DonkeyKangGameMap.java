@@ -13,6 +13,7 @@ public class DonkeyKangGameMap extends GameMap {
 	protected boolean isMovingLeft = false;
 	protected boolean isClimbingDown = false;
 	protected static boolean isClimbing = false;
+	protected int counter;
 	public static boolean isMovingUp = false;
 	public DonkeyKangGameMap(){
 		setUpSteps();
@@ -126,30 +127,36 @@ public class DonkeyKangGameMap extends GameMap {
 		if(isClimbing && checkJumpManCollisionsWithLatter(hero)){
 			hero.climb();
 		}
-		if(isClimbingDown && checkJumpManCollisionsWithLatter(hero)){
+		if(isClimbingDown && checkJumpManCollisionsWithLatter(hero) && !checkJumpManCollisionsWithSteps(hero)){
 			hero.climbDown();
 		}
 		if(isMovingRight && !isClimbing){
 			hero.moveRight();
-			hero.moveDown();
+			if(!checkJumpManCollisionsWithLatter(hero) &&!isMovingUp){
+				hero.moveDown();
+			}
 			while(checkJumpManCollisionsWithSteps(hero)){
 				hero.setY(hero.getY()-1);
 			}
 		}
 		else if(isMovingLeft && !isClimbing){
 			hero.moveLeft();
-			hero.moveDown();
+			if(!checkJumpManCollisionsWithLatter(hero) && !isMovingUp){
+				hero.moveDown();
+			}
 			while(checkJumpManCollisionsWithSteps(hero)){
 				hero.setY(hero.getY()-1);
 			}
 		}
-		if(isMovingUp){
+		if(isMovingUp && counter!=30){
 			hero.moveUp();
+			counter +=5;
 		}
-		else if(!isClimbing){ 
+		else if(!checkJumpManCollisionsWithLatter(hero)){ 
 			hero.moveDown();
 			while(checkJumpManCollisionsWithSteps(hero)){ 
 					hero.setY(hero.getY()-1);
+					counter = 0;
 			}
 		}
 	}

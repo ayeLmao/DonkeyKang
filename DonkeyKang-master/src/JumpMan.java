@@ -16,7 +16,7 @@ public class JumpMan extends GameObject {
 	public void moveRight(){
 		openImage("heroRight");
 		//move character right
-		if (x <= 930) {
+		if (x <= 920) {
 			x += 3;
 		}
 		if(x>870 && !isRightUp){
@@ -36,10 +36,6 @@ public class JumpMan extends GameObject {
 	public void moveUp() {
 		if(y >= 5){
 			y -= 5;
-		}
-		maxJump +=5;
-		if(maxJump >= 40){
-			DonkeyKangGameMap.isMovingUp = false;
 		}
 	}
 	public void moveDown() {
