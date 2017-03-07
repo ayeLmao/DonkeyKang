@@ -34,12 +34,12 @@ public class JumpMan extends GameObject {
 		}
 	}
 	public void moveUp() {
-		if(y >= 5){
-			y -= 5;
+		if(y >= 1){
+			y -= 1;
 		}
 	}
 	public void moveDown() {
-			y += 5;
+			y += 1;
 	}
 	public void climb() {
 		y-=1;

@@ -34,11 +34,8 @@ public class GameObject {
 			e.printStackTrace();
 		}
 	}
-
 	public void draw(Graphics g){
 		g.drawImage(img, x, y, null);
-		
-		
 	}
 	public int getWidth(){
 		return width;

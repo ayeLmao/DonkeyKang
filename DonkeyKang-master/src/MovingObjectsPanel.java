@@ -16,6 +16,7 @@ public class MovingObjectsPanel extends JPanel {
 	final Dimension defaultDim;
 	DonkeyKangGameMap gm;
 	private Timer t;
+	private Timer t2;
 	Image image1;
 	
 	public MovingObjectsPanel(Dimension dim) {
@@ -23,6 +24,7 @@ public class MovingObjectsPanel extends JPanel {
 		setUpKeyMappings();
 		makeGameMap();
 		t.start();
+		t2.start();
 	}
 	private void makeGameMap() {
 		gm = new DonkeyKangGameMap();
@@ -30,6 +32,14 @@ public class MovingObjectsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				gm.tick();
+				repaint();
+			}
+				
+		});
+		t2 = new Timer(5000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				gm.tick2();
 				repaint();
 			}
 				

@@ -8,7 +8,9 @@ import java.util.List;
 public class DonkeyKangGameMap extends GameMap {
 	protected List<Step> steps = new ArrayList<Step>();
 	protected List<Latter> latters = new ArrayList<Latter>();
+	protected List<Barrel> barrels = new ArrayList<Barrel>();
 	private JumpMan hero = new JumpMan(300, 750);
+	private DonkeyKang villan = new DonkeyKang(0, 20);
 	protected boolean isMovingRight = false;
 	protected boolean isMovingLeft = false;
 	protected boolean isClimbingDown = false;
@@ -20,6 +22,7 @@ public class DonkeyKangGameMap extends GameMap {
 		setUpLatters();
 	}
 	private void setUpLatters() {
+//		barrels.add(new Barrel(30, 70));
 		for(int i =0; i<3; i++){
 			latters.add(new Latter(steps.get(26).getX(), steps.get(10+28*i).getY()));
 			latters.add(new Latter(steps.get(29).getX()+30, steps.get(16+28*i).getY()));
@@ -75,7 +78,11 @@ public class DonkeyKangGameMap extends GameMap {
 		for(int i=0; i<steps.size(); i++){
 			steps.get(i).draw(g);
 		}
+		for(int i=0; i<barrels.size(); i++){
+			barrels.get(i).draw(g);
+		}
 		hero.draw(g);
+		villan.draw(g);
 	}
 	private boolean checkJumpManCollisionsWithSteps(JumpMan hero) {
 		int x = hero.getX();
@@ -88,6 +95,7 @@ public class DonkeyKangGameMap extends GameMap {
 		}
 		return false;
 	}
+	
 	private boolean checkJumpManCollisionsWithLatter(JumpMan hero) {
 		int x = hero.getX();
 		int y = hero.getY();
@@ -148,9 +156,9 @@ public class DonkeyKangGameMap extends GameMap {
 				hero.setY(hero.getY()-1);
 			}
 		}
-		if(isMovingUp && counter!=30){
+		if(isMovingUp && counter!=40){
 			hero.moveUp();
-			counter +=5;
+			counter +=1;
 		}
 		else if(!checkJumpManCollisionsWithLatter(hero)){ 
 			hero.moveDown();
@@ -158,6 +166,9 @@ public class DonkeyKangGameMap extends GameMap {
 					hero.setY(hero.getY()-1);
 					counter = 0;
 			}
+		}
+		for(int i=0; i<barrels.size(); i++){
+			barrelMove(barrels.get(i));
 		}
 	}
 	public void beginJump() {
@@ -179,5 +190,52 @@ public class DonkeyKangGameMap extends GameMap {
 	}
 	public void endClimbDown() {
 		isClimbingDown = false;
+	}
+	public void tick2() {
+		barrels.add(new Barrel(70, 60));
+		
+	}
+	private void barrelMove(Barrel b) {
+		if(b.getIsBarrelFalling()){
+			if(checkBarrelCollisionsWithSteps(b)){
+				b.setIsBarrelFalling(false);
+				if(b.getIsRightDown()){
+					b.setIsRightDown(false);
+				}
+				else{
+					b.setIsRightDown(true);
+				}
+			}
+				b.moveDown();
+		}
+		else{
+		if(b.getIsRightDown()){
+			b.moveRight();
+		}
+		else{
+			b.moveLeft();
+		}
+		b.moveDown();
+		if(!checkBarrelCollisionsWithSteps(b)){
+			b.moveDown();
+			b.setIsBarrelFalling(true);
+		}
+		else{
+			while(checkBarrelCollisionsWithSteps(b)){
+				b.setY(b.getY()-1);
+			}
+		}
+		}
+	}
+	private boolean checkBarrelCollisionsWithSteps(Barrel b) {
+		int x = b.getX();
+		int y = b.getY();
+		Rectangle testBounds = new Rectangle(x, y, b.getWidth(), b.getHeight());
+		for(Step s: steps){
+			if (s.getBoundingRect().intersects(testBounds)){
+				return true;
+			}
+		}
+		return false;
 	}
 }
